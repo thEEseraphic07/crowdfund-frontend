@@ -1,0 +1,193 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  padding:20px;
+}
+
+.auth-wrapper{
+  width:100%;
+  max-width:900px;
+  display:flex;
+  border-radius:20px;
+  overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+}
+
+/* ---- forgot-password.html: single centered card ---- */
+.auth-card{
+  width:100%;
+  max-width:420px;
+  margin:0 auto;
+  background:white;
+  border-radius:20px;
+  padding:40px;
+}
+
+.auth-card h2{
+  margin-bottom:8px;
+}
+
+.auth-card .subtitle{
+  color:#666;
+  font-size:14px;
+  margin-bottom:24px;
+}
+
+/* ---- reset-password.html: brand panel + form panel ---- */
+.auth-brand{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:40px;
+  color:white;
+}
+
+.auth-brand h1{
+  font-size:32px;
+  margin-bottom:10px;
+  color:#00ffd0;
+}
+
+.auth-form{
+  flex:1;
+  background:white;
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-radius:20px 0 0 20px;
+}
+
+.auth-form h2{
+  margin-bottom:20px;
+}
+
+/* ---- shared form styling ---- */
+.field{
+  margin-bottom:16px;
+}
+
+.field label{
+  display:block;
+  font-size:14px;
+  margin-bottom:6px;
+  color:#333;
+}
+
+.field input,
+#resendForm input{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-bottom:2px solid #ccc;
+  outline:none;
+  transition:.3s;
+}
+
+.field input:focus,
+#resendForm input:focus{
+  border-color:#4f8cff;
+}
+
+.field .error{
+  display:block;
+  color:#ff4f6d;
+  font-size:12px;
+  margin-top:4px;
+  min-height:14px;
+}
+
+button,
+.btn.primary{
+  width:100%;
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#4f8cff,#ff9de6);
+  color:white;
+  font-size:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+button:hover,
+.btn.primary:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+#resendForm{
+  margin-top:20px;
+}
+
+.auth-links,
+.redirect{
+  margin-top:16px;
+  font-size:14px;
+  text-align:center;
+}
+
+.auth-links a,
+.redirect a{
+  color:#4f8cff;
+  text-decoration:none;
+}
+
+.success,
+.form-message,
+#message{
+  margin-top:14px;
+  font-size:14px;
+  text-align:center;
+  min-height:18px;
+}
+
+.success{
+  color:#2ecc71;
+}
+
+/* ---- responsive ---- */
+@media (max-width: 768px) {
+  .auth-wrapper{
+    flex-direction:column;
+  }
+
+  .auth-brand,
+  .auth-form{
+    padding:24px;
+  }
+
+  .auth-form{
+    border-radius:20px 20px 0 0;
+    order:1;
+  }
+
+  .auth-brand{
+    order:2;
+  }
+
+  .auth-brand h1{
+    font-size:24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .auth-card,
+  .auth-brand,
+  .auth-form{
+    padding:18px;
+  }
+}

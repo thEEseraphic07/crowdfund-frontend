@@ -1,0 +1,303 @@
+/* ============================= */
+/* GLOBAL DARK GLASS BACKGROUND  */
+/* ============================= */
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(135deg, #0a0f2c, #0f1a4d);
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Soft pink and blue glow blobs */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+}
+
+body::before {
+  background: rgba(255, 0, 128, 0.4);
+  top: -100px;
+  left: -100px;
+}
+
+body::after {
+  background: rgba(0, 102, 255, 0.4);
+  bottom: -150px;
+  right: -100px;
+}
+
+/* ============================= */
+/* NAVBAR                        */
+/* ============================= */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 8%;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+  background: linear-gradient(90deg, #4f8cff, #ff4db8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar nav a {
+  margin-left: 25px;
+  text-decoration: none;
+  color: #ffffff;
+  transition: 0.3s ease;
+  position: relative;
+}
+
+.navbar nav a:hover,
+.navbar nav a.active {
+  color: #ff4db8;
+}
+
+.how-hero {
+  text-align: center;
+  padding: 100px 20px 60px;
+}
+
+.how-hero h1 {
+  font-size: 48px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #ffffff, #ff4db8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.how-hero p {
+  font-size: 18px;
+  color: #cbd5ff;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 40px;
+  padding: 60px 8%;
+}
+
+.step {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(25px);
+  border-radius: 20px;
+  padding: 40px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.step:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
+}
+
+.step-number {
+  font-size: 28px;
+  font-weight: bold;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #4f8cff, #ff4db8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
+}
+
+.step h2 {
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.step p {
+  color: #d6d9ff;
+  line-height: 1.6;
+}
+
+.how-cta {
+  text-align: center;
+  padding: 80px 20px;
+  margin: 60px 8%;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(30px);
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.how-cta h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+  background: linear-gradient(90deg, #4f8cff, #ff4db8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.how-cta p {
+  max-width: 600px;
+  margin: 0 auto 30px;
+  color: #d0d4ff;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 14px 35px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+  background: linear-gradient(90deg, #4f8cff, #ff4db8);
+  transition: 0.4s ease;
+}
+
+.cta-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 0, 128, 0.6);
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 18px 5%;
+  }
+
+  .navbar nav a {
+    margin-left: 15px;
+  }
+
+  .how-hero {
+    padding: 70px 20px 40px;
+  }
+
+  .how-hero h1 {
+    font-size: 38px;
+  }
+
+  .steps {
+    gap: 25px;
+    padding: 40px 5%;
+  }
+
+  .step {
+    padding: 30px 25px;
+  }
+
+  .how-cta {
+    padding: 60px 25px;
+    margin: 40px 5%;
+  }
+}
+
+.menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+@media (max-width: 450px) {
+  .navbar {
+    position: relative;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .navbar nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    min-width: 180px;
+    background: rgba(10, 15, 44, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    z-index: 100;
+  }
+
+  .navbar nav.show {
+    display: flex;
+  }
+
+  .navbar nav a {
+    margin-left: 0;
+  }
+}
+
+
+@media (max-width: 400px) {
+  .navbar {
+    position: relative;
+  }
+
+  .menu-btn {
+    display: block;
+  }
+
+  .navbar nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 20px;
+    flex-direction: column;
+    gap: 15px;
+    padding: 20px;
+    min-width: 180px;
+    background: rgba(10, 15, 44, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    z-index: 100;
+  }
+
+  .navbar nav.show {
+    display: flex;
+  }
+
+  .navbar nav a {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 375px) {
+  .how-hero h1 {
+    font-size: 27px;
+  }
+
+  .navbar nav a {
+    font-size: 13px;
+  }
+
+  .step h2 {
+    font-size: 20px;
+  }
+
+  .how-cta h2 {
+    font-size: 24px;
+  }
+}

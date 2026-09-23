@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works | CrowdFund</title>
+  <link rel="stylesheet" href="../css/how-it-works.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="logo">CrowdFund</div>
+    <button class="menu-btn" id="menuBtn" aria-label="Open navigation">
+  ☰
+</button>
+
+<nav id="navMenu">
+  <a href="index.html">Home</a>
+  <a href="how-it-works.html" class="active">How it works</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="testimonials.html">Testimonials</a>
+</nav>
+  </header>
+
+  <section class="how-hero fade-in">
+    <h1>How CrowdFund Works</h1>
+    <p>Start raising funds in minutes. No complicated process</p>
+  </section>
+
+  <section class="steps fade-in">
+    <div class="step">
+      <div class="step-number">01</div>
+        <h2>Create Your Campaign</h2>
+        <p>
+          Sign up and create a campaign by adding a title, description, goal amount, and campaign image.
+          Build your story and share why your cause matters to inspire donors.
+        </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">02</div>
+      <h2>Share With Your Community (Share & Promote)</h2>
+      <p>
+        Share your campaign with your family and friends and social media to spread awareness and gather support.
+        Engage your audience, track analytics, and grow your community of supporters.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">03</div>
+      <h2>Recieve Donations / Get Funded</h2>
+      <p>
+        As donations come in, watch your campaign grow and get funded. Withdraw your funds easily and securely.
+        Use the funds to bring your project to life and make a difference in the world.
+        Receive donations, update supporters, and bring your vision to life successfully.
+      </p>
+    </div>
+
+    <div class="step">
+      <div class="step-number">04</div>
+      <h2>Withdraw Funds</h2>
+      <p>
+        Once your campaign is complete, withdraw your funds easily and securely. 
+        Manage your finances and ensure transparency with your supporters.
+      </p>
+    </div>
+  </section>
+
+  <section class="how-cta fade-in">
+    <h2>Ready to Start?</h2>
+    <p>Create your campaign today and start making a difference in the world. Join our community of changemakers and bring your vision to life.</p>
+    <a href="register.html" class="cta-btn">Start Fundraising</a>
+  </section>
+
+  <script>
+    const menuBtn = document.getElementById("menuBtn");
+    const navMenu = document.getElementById("navMenu");
+
+    menuBtn.addEventListener("click", () => {
+      navMenu.classList.toggle("show");
+    });
+    const faders = document.querySelectorAll(".fade-in");
+    const appearOptions = {
+      threshold: 0.2
+    };
+
+    const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) {
+          return;
+        } else {
+          entry.target.classList.add("appear");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, appearOptions);
+    
+    faders.forEach(fader => {
+      appearOnScroll.observe(fader);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create Campaign | CrowdFund</title>
+  <link rel="stylesheet" href="../css/create-campaign.css" />
+</head>
+<body>
+
+  <div class="campaign-wrapper">
+
+    <!-- Left branding panel -->
+    <div class="campaign-brand">
+      <h1>CrowdFund</h1>
+      <p>
+        Turn your ideas into reality.<br />
+        Launch campaigns and inspire support.
+      </p>
+    </div>
+
+    <!-- Right form panel -->
+    <div class="campaign-form">
+      <span class="form-badge">New Campaign</span>
+      <h2>Create a Campaign</h2>
+      <p class="muted">
+        Fill in the details below to launch your campaign
+      </p>
+
+      <form id="campaignForm">
+
+        <div class="field">
+          <label>Campaign Title</label>
+          <input type="text" name="title" placeholder="Help fund my startup idea" required />
+        </div>
+
+        <div class="field">
+          <label>Campaign Description</label>
+          <textarea name="description" rows="4" placeholder="Tell people why this campaign matters..." required></textarea>
+        </div>
+
+        <div class="field">
+          <label>Category</label>
+          <select name="category" required>
+            <option value="">Select category</option>
+            <option value="Medical">Medical</option>
+            <option value="Education">Education</option>
+            <option value="Startup">Startup</option>
+            <option value="Community">Community</option>
+            <option value="Charity">Charity</option>
+            <option value="emergency">Emergency</option>
+            <option value="business">Business</option>
+            <option value="Other">Other</option>
+            <option value="Arts">Arts</option>
+            <option value="Technology">Technology</option>
+            <option value="Philanthropy">Philanthropy</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Target Amount (₦)</label>
+          <input type="number" name="targetAmount" placeholder="500000" required />
+        </div>
+
+        <div class="field">
+          <label>Deadline</label>
+          <input type="date" name="deadline" required />
+        </div>
+
+        <div class="field">
+          <label>Campaign Image</label>
+          <input type="text" name="image" placeholder="Image URL (optional)" />
+        </div>
+
+        <button type="submit" class="submit-btn">
+          Launch Campaign 🚀
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+
+  <script src="../javascript/config.js"></script>
+  <script src="../javascript/create-campaign.js"></script>
+</body>
+</html>

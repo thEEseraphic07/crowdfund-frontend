@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard | CrowdFund</title>
+
+<link rel="stylesheet" href="../css/dashboard.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div id="donateModal" class="donate-modal hidden">
+
+  <div class="donation-modal">
+
+    <div class="modal-top">
+
+      <h2>❤️ Support Campaign</h2>
+
+      <button
+      id="closeDonate">
+      ✕
+      </button>
+
+    </div>
+
+    <p class="donation-text">
+      Your contribution helps this campaign grow.
+    </p>
+
+    <div class="quick-amounts">
+
+      <button data-value="1000">₦1k</button>
+
+      <button data-value="5000">₦5k</button>
+
+      <button data-value="10000">₦10k</button>
+
+      <button data-value="20000">₦20k</button>
+
+    </div>
+
+    <input
+      id="donationAmount"
+      type="number"
+      placeholder="Enter amount (NGN)"
+    />
+
+    <div class="summary">
+
+      <div>
+        Donation
+        <span id="summaryAmount">
+          ₦0
+        </span>
+      </div>
+
+      <div>
+        Platform Fee
+        <span id="summaryFee">
+          ₦0
+        </span>
+      </div>
+
+      <div class="creator-line">
+        Campaign Receives
+
+        <span id="summaryCreator">
+          ₦0
+        </span>
+
+      </div>
+
+    </div>
+
+    <button
+      id="payBtn">
+
+      Donate Now
+
+    </button>
+
+  </div>
+
+</div>
+
+<button id="sidebarToggle" class="icon-btn sidebar-toggle">
+  <i class="fa-solid fa-bars"></i>
+  </button>
+
+<div class="dashboard">
+
+<aside class="sidebar">
+  <h2 class="logo">CrowdFund</h2>
+
+  <ul class="nav">
+    <li class="active" data-section="overview">Dashboard</li>
+    <li data-section="campaigns">My Campaigns</li>
+    <li data-section="exploreCampaigns">Explore Campaigns</li>
+    <li data-section="donations">Donations</li>
+    <li data-section="notifications">Notifications</li>
+    <li data-section="wallet">Wallet</li>
+    <li data-section="analytics">Analytics</li>
+    <li data-section="profileSection">Profile</li>
+
+    <li class="create">
+      <a href="create-campaign.html">Create Campaign</a>
+    </li>
+
+    <li id="logoutBtn" class="logout">
+      <i class="fa-solid fa-right-from-bracket"></i>
+      Logout
+    </li>
+  </ul>
+</aside>
+
+<main class="main">
+<header class="topbar">
+
+  <div>
+    <h2>Welcome back, <span id="userName"></span></h2>
+    <p>Track your campaigns and donations</p>
+  </div>
+
+  <div class="top-actions">
+
+    <div class="notification-wrapper">
+      <button id="notifBtn" class="icon-btn">
+        <i class="fa-solid fa-bell"></i>
+        <span id="notifCount" class="notif-count">0</span>
+      </button>
+
+      <div id="notifDropdown" class="notif-dropdown">
+
+        <div class="notif-header">
+        </div>
+
+        <div class="notif-tabs">
+          <button class="tab active" data-tab="all">
+          </button>
+          <button class="tab" data-tab="unread">
+          </button>
+        </div>
+
+        <ul id="notifList"></ul>
+      </div>
+    </div>
+
+    <button id="themeToggle" class="icon-btn">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+  </div>
+</header>
+
+<section id="overview" class="section active">
+  <div class="stats">
+    <div class="card">
+      <h4>Total Raised</h4>
+      <p id="totalRaised">₦0</p>
+    </div>
+
+    <div class="card">
+      <h4>Active Campaigns</h4>
+      <p id="activeCampaigns">0</p>
+    </div>
+
+    <div class="card">
+      <h4>Total Donors</h4>
+      <p id="totalDonors">0</p>
+    </div>
+
+    <div class="card">
+      <h4>Wallet Balance</h4>
+      <p><span id="walletBalance">0</span></p>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+  <h3>Quick Actions</h3>
+
+  <div class="quick-actions-grid">
+    
+    <button class="action-card" onclick="location.href='create-campaign.html'">
+      <i class="fa-solid fa-plus"></i>
+      <span>Create Campaign</span>
+    </button>
+
+    <button class="action-card" onclick="document.querySelector('[data-section=\'wallet\']').click()">
+      <i class="fa-solid fa-money-bill-transfer"></i>
+      <span>Withdraw Funds</span>
+    </button>
+
+    <button class="action-card" onclick="document.querySelector('[data-section=\'wallet\']').click()">
+      <i class="fa-solid fa-wallet"></i>
+      <span>View Wallet</span>
+    </button>
+
+    <button class="action-card" onclick="location.href='campaign.html'">
+      <i class="fa-solid fa-compass"></i>
+      <span>Explore Campaigns</span>
+    </button>
+
+  </div>
+</div>
+
+  <div class="recent-activity">
+    <h3>Recent Activity</h3>
+    <div id="activityList"></div>
+  </div>
+</section>
+
+<section id="campaigns" class="section">
+  <h2>My Campaigns</h2>
+  <input type="text" id="searchCampaign" placeholder="Search..." class="search-input">
+  <div id="campaignGrid" class="campaign-grid"></div>
+  <p id="resultsCount"></p>
+</section>
+
+<section id="exploreCampaigns" class="section">
+  <h2>Explore Campaigns</h2>
+  <input type="text" id="allCampaignSearch" placeholder="Search campaigns..." class="search-input">
+  <div class="campaign-filters">
+    <select id="categoryFilter">
+      <option value="">All Categories</option>
+      <option value="charity">Charity</option>
+      <option value="education">Education</option>
+      <option value="emergency">Emergency</option>
+      <option value="technology">Technology</option>
+      <option value="art">Art</option>
+      <option value="community">Community</option>
+      <option value="philanthropy">Philanthropy</option>
+      <option value="medical">Medical</option>
+      <option value="startup">Startup</option>
+      <option value="business">Business</option>
+      <option value="other">Other</option>
+    </select>
+    
+    <select id="statusFilter">
+      <option value="">All Statuses</option>
+      <option value="active">Active</option>
+      <option value="completed">Ended</option>
+      </select>
+  </div>
+  <div id="allCampaignsGrid" class="campaign-grid"></div>
+</section>
+
+<section id="donations" class="section">
+  <h2>Donation Activity</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Donor</th>
+        <th>Campaign</th>
+        <th>Amount</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="donationsTable"></tbody>
+  </table>
+</section>
+
+<section id="notifications" class="section">
+  <h2>Notifications</h2>
+
+  <div class="notif-controls">
+    <button class="tab active" data-tab="all">All</button>
+    <button class="tab" data-tab="unread">Unread</button>
+    <button id="markAllRead">Mark all as read</button>
+  </div>
+
+  <div id="notificationsContainer" class="notifications-container"></div>
+</section>
+
+<section id="wallet" class="section">
+  <h2>Wallet</h2>
+
+  <div class="wallet-cards">
+    <div class="card"><h4>Balance</h4><p id="availableBalance">₦0</p></div>
+    <div class="card"><h4>Pending</h4><p id="pendingWithdrawal">₦0</p></div>
+    <div class="card"><h4>Withdrawn</h4><p id="totalWithdrawn">₦0</p></div>
+  </div>
+
+  <input type="number" id="withdrawAmount" placeholder="Enter Amount (NGN)">
+
+<select id="bankName">
+  <option value="">Select Bank</option>
+</select>
+<div class="withdraw-box">
+
+  <h3>Withdraw Funds</h3>
+
+  <input
+    type="number"
+    id="withdrawAmount"
+    placeholder="Enter Amount (NGN)"
+  >
+
+  <select id="bankName">
+    <option value="">Select Bank</option>
+  </select>
+
+  <input
+    type="text"
+    id="accountNumber"
+    placeholder="Enter Account Number"
+    maxlength="10"
+  >
+
+  <p id="accountName"></p>
+
+  <button id="withdrawBtn">
+    Request Withdrawal
+  </button>
+
+</div>
+
+  <ul id="transactionsList" class="activity"></ul>
+  <div id="messageBox"></div>
+</section>
+
+<section id="analytics" class="section">
+  <h2>Analytics</h2>
+
+  <div class="analytics-filters">
+    <button onclick="loadAnalytics(7)">Last 7 Days</button>
+    <button onclick="loadAnalytics(30)">Last 30 Days</button>
+    <button onclick="loadAnalytics(365)">Last 1 Year</button>
+  </div>
+
+  <div class="analytics-cards">
+    <div class="card">
+      <h4>Total Donations</h4>
+      <p id="analyticsTotalDonations">0</p>
+    </div>
+
+    <div class="card">
+      <h4>Total Amount Raised</h4>
+      <p id="analyticsTotalAmount">₦0</p>
+    </div>
+
+    <div class="card">
+      <h4>Average Donation</h4>
+      <p id="avgDonation">₦0</p>
+    </div>
+  </div>
+
+  <h3 class="top">Top Campaigns</h3>
+  <div id="topCampaigns" class="campaign-grid"></div>
+</section>
+
+<section id="profileSection" class="section">
+
+  <div class="profile-wrapper">
+
+    <!-- LEFT: USER SUMMARY -->
+    <div class="profile-card">
+
+      <!-- AVATAR -->
+      <div class="avatar-box">
+        <img id="avatar" class="avatar" src="/images/default-avatar.png" alt="Avatar">
+
+        <input type="file" id="fileInput" accept="image/*" hidden>
+
+        <div class="avatar-actions">
+          <button id="uploadBtn" class="btn-light">Upload</button>
+          <button id="removeBtn" class="btn-danger">Remove</button>
+        </div>
+      </div>
+
+      <!-- BASIC INFO (POPULATED FROM BACKEND) -->
+      <h3 id="profileNameDisplay"></h3>
+      <p id="profileEmailDisplay"></p>
+
+      <p id="profileLocation"></p>
+
+      <!-- TRUST BADGES -->
+      <div class="trust-badges">
+        <span id="verificationBadge" class="badge"></span>
+        <span id="accountTypeBadge" class="badge"></span>
+        <span id="trustScoreBadge" class="badge"></span>
+      </div>
+
+      <!-- MEMBER SINCE -->
+      <small id="memberSince"></small>
+
+    </div>
+
+    <div class="profile-form-card">
+
+      <h2>Profile Settings</h2>
+
+      <form id="profileForm">
+
+        <input type="text" id="name" placeholder="Full name">
+
+        <input type="email" id="email" placeholder="Email address">
+
+        <input type="text" id="phone" placeholder="Phone number">
+
+        <input type="text" id="location" placeholder="Location">
+
+        <textarea id="bio" placeholder="Tell us about yourself"></textarea>
+
+        <button type="submit">Save Changes</button>
+
+      </form>
+    </div>
+
+  </div>
+</section>
+</main>
+</div>
+
+<div id="toast" class="toast"></div>
+<div class="confirm-modal" id="confirmModal">
+
+  <div class="confirm-box">
+
+    <div class="confirm-icon">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <h3 id="confirmTitle">
+      Confirm Logout
+    </h3>
+
+    <p id="confirmMessage">
+      Are you sure you want to logout?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button class="cancel-btn" id="confirmNo">
+        Cancel
+      </button>
+
+      <button class="confirm-btn" id="confirmYes">
+        Confirm
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
+<script src="../javascript/confirm.js"></script>
+<script src="../javascript/config.js"></script>
+<script src="../javascript/dashboard.js"></script>
+
+</body>
+</html>

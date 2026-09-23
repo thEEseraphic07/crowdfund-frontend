@@ -1,0 +1,334 @@
+*{
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+
+    font-family: "Poppins", sans-serif;
+
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(79, 70, 229, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 194, 255, 0.12),
+            transparent 35%
+        ),
+        #050816;
+
+    color: white;
+}
+
+.otp-container {
+    position: relative;
+
+    width: 100%;
+    max-width: 440px;
+
+    padding: 45px 40px;
+
+    background: rgba(11, 17, 32, 0.92);
+
+    border: 1px solid rgba(148, 163, 184, 0.12);
+
+    border-radius: 28px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        0 0 50px rgba(79, 70, 229, 0.08);
+
+    backdrop-filter: blur(15px);
+
+    animation: cardAppear 0.7s ease forwards;
+}
+
+.otp-logo {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.otp-logo h1 {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4cc9ff,
+            #6366f1
+        );
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.otp-logo::before {
+    content: "\f023";
+
+    width: 62px;
+    height: 62px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 18px;
+
+    background: rgba(79, 70, 229, 0.12);
+
+    color: #4cc9ff;
+
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+
+    font-size: 24px;
+
+    box-shadow:
+        0 0 25px rgba(76, 201, 255, 0.08);
+}
+
+.otp-title {
+    text-align: center;
+}
+
+.otp-title h2 {
+    margin: 0 0 10px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #ffffff;
+}
+
+.otp-title p {
+    max-width: 320px;
+
+    margin: 0 auto;
+
+    color: #94a3b8;
+
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.otp-form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+
+.otp-input {
+    width: 100%;
+
+    padding: 16px 17px;
+
+    border: 1px solid rgba(148, 163, 184, 0.12);
+
+    outline: none;
+
+    border-radius: 14px;
+
+    background: #111827;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 15px;
+
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.otp-input::placeholder {
+    color: #64748b;
+}
+
+.otp-input:focus {
+    background: #131c2e;
+
+    border-color: #4cc9ff;
+
+    box-shadow:
+        0 0 0 4px rgba(76, 201, 255, 0.08);
+}
+
+#otp {
+    text-align: center;
+
+    font-size: 20px;
+    font-weight: 600;
+
+    letter-spacing: 5px;
+}
+
+#otp::placeholder {
+    letter-spacing: 0;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.otp-btn {
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #4f46e5,
+            #00a8ff
+        );
+
+    color: white;
+
+    font-family: inherit;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+}
+
+.otp-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 12px 25px rgba(0, 168, 255, 0.2);
+}
+
+.otp-btn:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.resend-wrapper {
+    margin-top: 22px;
+
+    text-align: center;
+}
+
+.resend-btn {
+    padding: 0;
+
+    border: none;
+
+    background: none;
+
+    color: #4cc9ff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    transition: color 0.2s ease;
+}
+
+.resend-btn:hover:not(:disabled) {
+    color: white;
+}
+
+.resend-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+#timer {
+    min-height: 18px;
+
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+#msg {
+    min-height: 20px;
+
+    margin: 18px 0 0;
+
+    text-align: center;
+
+    color: #ff7b7b;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@keyframes cardAppear {
+
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 20px;
+    }
+
+    .otp-container {
+        padding: 35px 25px;
+
+        border-radius: 22px;
+    }
+
+    .otp-title h2 {
+        font-size: 24px;
+    }
+
+    .otp-logo h1 {
+        font-size: 27px;
+    }
+
+}

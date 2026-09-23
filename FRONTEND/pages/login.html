@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login</title>
+<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<div class="particles">
+  <span style="left:10%; animation-delay:0s;"></span>
+  <span style="left:30%; animation-delay:2s;"></span>
+  <span style="left:50%; animation-delay:4s;"></span>
+  <span style="left:70%; animation-delay:1s;"></span>
+  <span style="left:90%; animation-delay:3s;"></span>
+</div>
+
+<div id="intro">
+  <h1 id="brand"></h1>
+</div>
+
+<div class="auth-container">
+
+  <div class="left-panel">
+    <h1>Welcome Back 👋</h1>
+  </div>
+
+  <div class="form-panel">
+    <h2>Login</h2>
+
+    <form id="loginForm">
+
+      <div class="input-group">
+        <i class="fa fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email" required>
+      </div>
+
+      <div class="input-group">
+        <i class="fa fa-lock"></i>
+        <input type="password" id="password" placeholder="Password" required>
+        <i class="fa fa-eye toggle-password" id="togglePassword"></i>
+      </div>
+
+      <p id="errorMsg" style="color: red; font-size: 12px;"></p>
+
+      <button id="loginBtn" class="btn" type="submit"><span class="spinner"></span><span class="btn-text">Login</span></button>
+      
+    </form>
+    <a href="register.html" class="switch">
+      Don't have an account? Register here
+    </a>
+
+    <a href="forgot-password.html" class="switch">
+      Forgot your password?
+    </a>
+
+    <label class="switch">
+      <input type="checkbox" id="rememberMe">
+      Remember Me
+    </label>
+
+    <a href="index.html" class="switch">
+      Back to homepage
+    </a>
+  </div>
+
+</div>
+
+<script src="../javascript/config.js"></script>
+<script src="../javascript/login.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,244 @@
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Inter",sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#0f172a,#1e293b);
+  overflow-x:hidden;
+  overflow-y:auto;
+  padding:20px;
+}
+
+.particles span{
+  position:absolute;
+  display:block;
+  width:15px;
+  height:15px;
+  background:rgba(255,255,255,0.2);
+  border-radius:50%;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float{
+  0%{ transform:translateY(100vh) scale(0); }
+  100%{ transform:translateY(-10vh) scale(1); }
+}
+
+
+.auth-container{
+  position:relative;
+  max-width:900px;
+  width:min(900px, 92vw);
+  height:min(550px, 90vh);
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  background:rgba(255,255,255,0.05);
+  backdrop-filter:blur(20px);
+}
+
+/* GLOW BORDER */
+.auth-container::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  border-radius:20px;
+  background:linear-gradient(45deg,#4f8cff,#ff9de6,#00f0ff,#ff4f8c);
+  z-index:-1;
+  animation: rotate 6s linear infinite;
+}
+
+@keyframes rotate{
+  0%{filter:hue-rotate(0deg);}
+  100%{filter:hue-rotate(360deg);}
+}
+
+/* LEFT PANEL */
+.left-panel{
+  flex:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  color:white;
+  padding:40px;
+}
+
+.left-panel h1{
+  font-size:32px;
+}
+
+.span{
+  font-size: 32px;
+  background: linear-gradient(135deg, #00ffd0, #00b3ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-panel{
+  flex:1;
+  background:white;
+  padding:40px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  border-radius:20px 0 0 20px;
+  overflow-y:auto;
+}
+
+.form-panel h2{
+  margin-bottom:20px;
+}
+
+.input-group{
+  margin-bottom:15px;
+}
+
+.input-group input{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-bottom:2px solid #ccc;
+  outline:none;
+  transition:.3s;
+}
+
+.input-group input:focus{
+  border-color:#4f8cff;
+}
+
+.btn{
+  margin-top:15px;
+  padding:12px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(135deg,#4f8cff,#ff9de6);
+  color:white;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
+
+a{
+  text-decoration: none;
+  margin-top:10px;
+  font-size:15px;
+  cursor:pointer;
+  color:#4f8cff;
+}
+
+#intro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+#brand {
+  font-size: 80px;
+  color: #00ffd0;
+  letter-spacing: 5px;
+}
+
+.letter {
+  opacity: 0;
+  display: inline-block;
+  transform: translateY(-50px);
+  animation: drop 0.4s forwards;
+}
+
+@keyframes drop {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.glow {
+  animation: glow 0.6s ease-in-out 2 alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #00ffd0;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffd0, 0 0 30px #00ffd0;
+  }
+}
+
+.particles span{
+  position:absolute;
+  display:block;
+  width:15px;
+  height:15px;
+  background:rgba(255,255,255,0.2);
+  border-radius:50%;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float{
+  0%{ transform:translateY(100vh) scale(0); }
+  100%{ transform:translateY(-10vh) scale(1); }
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: auto;
+  }
+
+  .left-panel {
+    width: 100%;
+    padding: 15px 10px;
+    background: none;
+    box-shadow: none;
+    text-align: center;
+  }
+
+  .left-panel h1 {
+    font-size: 23px;
+    margin: 0 0 15px;
+  }
+
+  .form-panel {
+    width: 100%;
+    padding: 24px 18px;
+  }
+}
+@media (max-width: 375px) {
+  .left-panel,
+  .form-panel {
+    padding: 18px 12px;
+  }
+
+  .left-panel h1 {
+    font-size: 20px;
+  }
+}
+
+@media (max-height: 700px) and (min-width: 769px) {
+  .auth-container {
+    height: auto;
+    max-height: 92vh;
+  }
+}

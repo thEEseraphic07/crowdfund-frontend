@@ -1,0 +1,145 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    font-family: "Poppins", sans-serif;
+    background:
+        radial-gradient(
+            circle at 20% 20%,
+            rgba(79, 70, 229, 0.18),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 80% 80%,
+            rgba(0, 194, 255, 0.12),
+            transparent 35%
+        ),
+        #050816;
+    color: #ffffff;
+}
+
+.auth-success {
+    width: 100%;
+    max-width: 500px;
+    padding: 55px 45px;
+    text-align: center;
+    background: rgba(11, 17, 32, 0.94);
+    border: 1px solid rgba(148, 163, 184, 0.12);
+    border-radius: 28px;
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.35),
+        0 0 50px rgba(79, 70, 229, 0.08);
+    backdrop-filter: blur(15px);
+    animation: successAppear 0.7s ease forwards;
+}
+
+.success-icon {
+    width: 85px;
+    height: 85px;
+    margin: 0 auto 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(34, 197, 94, 0.12);
+    border: 1px solid rgba(34, 197, 94, 0.25);
+    color: #4ade80;
+    font-size: 34px;
+    box-shadow: 0 0 35px rgba(34, 197, 94, 0.12);
+}
+
+.success-label {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: #4cc9ff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+}
+
+.auth-success h1 {
+    margin: 0 0 15px;
+    font-size: 38px;
+    line-height: 1.15;
+    background: linear-gradient(
+        135deg,
+        #ffffff,
+        #a5b4fc
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.auth-success > p {
+    max-width: 380px;
+    margin: 0 auto;
+    color: #94a3b8;
+    font-size: 15px;
+    line-height: 1.8;
+}
+
+.redirect-message {
+    margin-top: 30px;
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-radius: 12px;
+    background: rgba(79, 70, 229, 0.08);
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.redirect-message i {
+    color: #4cc9ff;
+    font-size: 14px;
+}
+
+@keyframes successAppear {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        padding: 20px;
+    }
+
+    .auth-success {
+        padding: 45px 25px;
+        border-radius: 22px;
+    }
+
+    .success-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 30px;
+    }
+
+    .auth-success h1 {
+        font-size: 31px;
+    }
+
+    .auth-success > p {
+        font-size: 14px;
+    }
+
+    .redirect-message {
+        font-size: 12px;
+    }
+}

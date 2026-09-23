@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="../css/verify-otp.css">
+  <title>Verify OTP | CrowdFund</title>
+</head>
+<body>
+
+  <div class="otp-container">
+
+  <div class="otp-logo">
+    <h1>CrowdFund</h1>
+  </div>
+
+  <div class="otp-title">
+    <h2>Verify OTP</h2>
+    <p>
+      Enter the verification code sent to your email
+    </p>
+  </div>
+
+  <div class="otp-form">
+
+    <input
+      type="email"
+      id="email"
+      class="otp-input"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="text"
+      id="otp"
+      class="otp-input"
+      placeholder="Enter OTP"
+      required
+    />
+
+    <button
+      class="otp-btn"
+      onclick="verifyOTP()"
+    >
+      Verify OTP
+    </button>
+
+  </div>
+
+  <div class="resend-wrapper">
+
+    <button
+      id="resendBtn"
+      class="resend-btn"
+      onclick="resendOTP()"
+    >
+      Resend OTP
+    </button>
+
+    <p id="timer"></p>
+
+  </div>
+
+  <p id="msg"></p>
+
+</div>
+<script src="../javascript/config.js"></script>
+  <script>
+    async function verifyOTP() {
+      const email = document.getElementById("email").value;
+      const otp = document.getElementById("otp").value;
+
+      const otpBtn = document.querySelector(".otp-btn");
+      otpBtn.textContent = "Verifying...";
+      otpBtn.disabled = true;
+
+      const res = await fetch(`${API_BASE}/auth/verify-2fa`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, code: otp })
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        otpBtn.textContent = "Verify OTP";
+        otpBtn.disabled = false;
+        document.getElementById("msg").innerText = data.message;
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+
+      if(data.user.isAdmin){
+        window.location.href = "../pages/admin.html";
+      } else {
+        window.location.href = "../pages/dashboard.html";
+      }
+    }
+
+    let countdown = 30;
+    function startTimer(){
+      const resendBtn = document.getElementById("resendBtn");
+
+      const timer = document.getElementById("timer");
+
+      resendBtn.disabled = true;
+
+      const interval = setInterval(() =>{
+        timer.innerText = `Resend available in ${countdown}s`;
+
+        countdown--;
+
+        if(countdown < 0){
+          clearInterval(interval);
+          resendBtn.disabled = false;
+          timer.innerText = "";
+          countdown = 30
+        }
+      }, 1000);
+    }
+
+    async function resendOTP(){
+      startTimer();
+
+      const email = localStorage.getItem("tempEmail");
+
+      const res = await fetch(
+        `${API_BASE}/auth/resend-otp`,
+        {
+          method: "POST",
+          headers:{
+            "Content-type": "application/json"
+          },
+          body: JSON.stringify({ email })
+        }
+      );
+
+      const data = await res.json();
+      alert(data.message)
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+  <title>Admin Dashboard</title>
+
+  <link rel="stylesheet" href="../css/admin.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="admin-dashboard">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="adminSidebar">
+    <div id="sidebarOverlay"></div>
+    <h2 class="logo">CF Admin</h2>
+
+    <ul class="nav">
+      <li data-section="overview" class="active"><i class="fas fa-chart-line"></i> Overview</li>
+      <li data-section="users"><i class="fas fa-users"></i> Users</li>
+      <li data-section="campaigns"><i class="fas fa-bullhorn"></i>All Campaigns</li>
+      <li data-section="donations"><i class="fas fa-hand-holding-dollar"></i> Donations</li>
+      <li data-section="withdrawals"><i class="fas fa-money-check-alt"></i> Withdrawals</li>
+      <li data-section="transactions"><i class="fas fa-receipt"></i> Transactions</li>
+      <li data-section="wallet"><i class="fas fa-wallet"></i> Platform Wallet</li>
+      <li data-section="notifications"><i class="fas fa-bell"></i> Notifications</li>
+      <li data-section="announcements"><i class="fas fa-bullhorn"></i> Announcements</li>
+      <li data-section="contactMessagesSection"><i class="fas fa-envelope"></i>Contact Messages</li>
+      <li data-section="settings"><i class="fas fa-cog"></i> Settings</li>
+      <button class="logout-btn" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </ul>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <div class="left">
+        <button id="toggleSidebar"><i class="fas fa-bars"></i></button>
+      </div>
+
+      <div class="center">
+        <h2 class="title">Overview</h2>
+      </div>
+
+      <div class="right"></div>
+    </header>
+
+    <div class="content dashboard-content">
+      <section id="overview" class="section active">
+        <h2 class="h2">Platform Overview</h2>
+        <p class="p">Full visibility into CrowdFund's performance</p>
+
+        <div class="cards">
+          <div class="card">
+            <p>Total Users</p>
+            <div class="card-icon users">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3 id="totalUsers">0</h3>
+          </div>
+
+          <div class="card">
+            <p>Total Donors</p>
+            <div class="card-icon donors">
+              <i class="fas fa-hand-holding-heart"></i>
+            </div>
+            <h3 id="totalDonors">0</h3>
+          </div>
+
+          <div class="card">
+            <p>Total Campaigns</p>
+            <div class="card-icon campaigns">
+              <i class="fas fa-bullhorn"></i>
+            </div>
+            <h3 id="totalCampaigns">0</h3>
+          </div>
+
+          <div class="card">
+            <p>Active Campaigns</p>
+              <div class="card-icon active">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            <h3 id="activeCampaigns">0</h3>
+          </div>
+
+          <div class="card">
+            <p>Total Donations (₦)</p>
+              <div class="card-icon donations">
+                <i class="fas fa-coins"></i>
+              </div>
+            <h3 id="totalDonations">₦0</h3>
+          </div>
+
+          <div class="card">
+            <p>Total Donation Count</p>
+              <div class="card-icon count">
+                <i class="fas fa-money-bill-wave"></i>
+              </div>
+            <h3 id="totalDonationsCount">0</h3>
+          </div>
+
+          <div class="card">
+            <p>Platform Profit</p>
+            <div class="card-icon profit">
+              <i class="fas fa-money-bill-alt"></i>
+            </div>
+            <h3 id="platformProfit">₦0</h3>
+          </div>
+
+          <div class="card warning">
+            <p>Pending Approvals</p>
+              <div class="card-icon pending">
+                <i class="fas fa-clock"></i>
+              </div>
+            <h3 id="pendingApprovals">0</h3>
+          </div>
+
+          <div class="card success">
+            <p>Platform Growth</p>
+              <div class="card-icon growth">
+                <i class="fas fa-arrow-trend-up"></i>
+              </div>
+            <h3 id="platformGrowth">+0%</h3>
+          </div>
+        </div>
+
+        <div class="panel revenue-panel">
+          <div class="panel-header">
+          <h3>Revenue Analytics</h3>
+
+          <button id="withdrawBtn" class="withdrawBtn">Withdraw Funds</button>
+          <span id="walletBalance">Wallet Balance: ₦0</span>
+          </div>
+          <div class="revenue-cards">
+
+        <div class="mini-card">
+          <p>This Month</p>
+          <h2 id="thisMonthRevenue">₦0</h2>
+        </div>
+
+        <div class="mini-card">
+          <p>Last Month</p>
+          <h2 id="lastMonthRevenue">₦0</h2>
+        </div>
+
+        <div class="mini-card">
+          <p>Total Platform Fees</p>
+          <h2 id="totalPlatformFees">₦0</h2>
+        </div>
+        </div>
+
+        <div class="revenue-chart">
+          <canvas id="revenueChart"></canvas>
+        </div>
+        </div>
+
+        <div class="overview-layout">
+          <div class="panel full-width">
+            <h3>Recent Donations Across The Platform</h3>
+            <div class="table-wrapper">
+              <table class="donation-table">
+                <thead>
+                  <tr>
+                    <th>Donor</th>
+                    <th>Campaign</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody id="donationActivity"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="bottom-grid">
+            <div class="panel">
+              <h3>Pending Approvals</h3>
+              <div id="pendingActivity"></div>
+            </div>
+
+            <div class="panel">
+              <h3>Flagged Campaigns</h3>
+              <div id="flaggedActivity"></div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- USERS -->
+      <section id="users" class="section">
+        <h2>User Management</h2>
+        <input type="text" id="userSearch" placeholder="Search user by name or email">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>Campaigns</th>
+              <th>Donations</th>
+              <th>Total Donated</th>
+              <th>Total Raised</th>
+              <th>Wallet Balance</th>
+              <th>Joined</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="adminUsersTable"></tbody>
+        </table>
+      </section>
+
+      <section id="campaigns" class="section">
+        <h2>All Campaigns</h2>
+
+        <div class="campaign-controls">
+          <input type="text" id="campaignSearch" placeholder="Search campaigns" class="search-input">
+
+          <select id="statusFilter">
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="pending">Pending</option>
+            <option value="flagged">Flagged</option>
+          </select>
+
+          <select id="categoryFilter">
+            <option value="all">All</option>
+            <option value="medical">Medical</option>
+            <option value="education">Education</option>
+            <option value="charity">Charity</option>
+            <option value="community">Community</option>
+            <option value="startup">Startup</option>
+            <option value="emergency">Emergency</option>
+            <option value="business">Business</option>
+            <option value="Other">Other</option>
+            <option value="Technology">Technology</option>
+            <option value="Philanthropy">Philanthropy</option>
+          </select>
+          
+        </div>
+
+        <div class="campaign-stats">
+          <div class="stat active">
+            <p>Active</p>
+            <h3 id="activeCount">0</h3>
+          </div>
+
+          <div class="stat pending">
+            <p>Pending</p>
+            <h3 id="pendingCount">0</h3>
+          </div>
+
+          <div class="stat flagged">
+            <p>Flagged</p>
+            <h3 id="flaggedCount">0</h3>
+          </div>
+        </div>
+
+        <div id="adminCampaigns" class="campaign-grid"></div>
+      </section>
+
+      <section id="donations" class="section">
+        <h2>Donations</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Campaign</th>
+              <th>Amount</th>
+              <th>Payment type</th>
+              <th>status</th>
+              <th>Date and Time</th>
+            </tr>
+          </thead>
+          <tbody id="adminDonations"></tbody>
+        </table>
+      </section>
+
+      <section id="withdrawals" class="section">
+        <h2>Withdrawals</h2>
+        <div id="withdrawalsTable" class="withdraw-grid"></div>
+      </section>
+
+      <section id="transactions" class="section">
+        <h2>Transactions</h2>
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Type</th>
+              <th>Status</th>
+              <th>Amount</th>
+              <th>Date and Time</th>
+            </tr>
+          </thead>
+          <tbody id="adminTransactions"></tbody>
+        </table>
+      </section>
+
+     <section id="wallet" class="section">
+
+    <h2>Platform Wallet</h2>
+    <p class="p">
+        Manage platform earnings and financial activity.
+    </p>
+
+    <div class="cards">
+
+        <div class="card">
+            <p>Current Balance</p>
+            <div class="card-icon profit">
+                <i class="fas fa-wallet"></i>
+            </div>
+            <h3 id="walletBalance">₦0</h3>
+        </div>
+
+        <div class="card">
+            <p>Total Fees Earned</p>
+            <div class="card-icon donations">
+                <i class="fas fa-coins"></i>
+            </div>
+            <h3 id="totalFees">₦0</h3>
+        </div>
+
+        <div class="card">
+            <p>Total Transactions</p>
+            <div class="card-icon campaigns">
+                <i class="fas fa-receipt"></i>
+            </div>
+            <h3 id="walletTransactionCount">0</h3>
+        </div>
+
+    </div>
+
+    <div class="wallet-layout">
+
+        <div class="panel">
+
+            <h3>Platform Transactions</h3>
+
+            <table class="table">
+
+                <thead>
+
+                    <tr>
+                        <th>Date</th>
+                        <th>Type</th>
+                        <th>Campaign</th>
+                        <th>Creator</th>
+                        <th>Fee</th>
+                        <th>Status</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="platformWalletTable">
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</section> 
+
+<section id="notifications" class="section">
+
+  <div class="section-header">
+
+    <div>
+      <h2>Notifications</h2>
+      <p>Recent platform alerts and activities</p>
+    </div>
+
+    <div class="notif-top-actions">
+
+      <button class="notif-filter active"
+        onclick="setNotificationFilter('all', this)">
+        All
+      </button>
+
+      <button class="notif-filter"
+        onclick="setNotificationFilter('unread', this)">
+        Unread
+      </button>
+
+      <button class="mark-all-btn"
+        onclick="markAllNotificationsRead()">
+        Mark All Read
+      </button>
+
+    </div>
+
+  </div>
+
+  <div class="notif-container" id="adminNotifications"></div>
+
+</section>
+
+<section id="announcements" class="section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Announcements</h2>
+            <p>Create, manage and publish platform announcements.</p>
+        </div>
+
+    </div>
+
+    <div class="announcement-stats">
+
+        <div class="stat-card total">
+            <i class="fas fa-bullhorn"></i>
+
+            <div>
+                <h3 id="totalAnnouncements">0</h3>
+                <span>Total</span>
+            </div>
+        </div>
+
+        <div class="stat-card published">
+            <i class="fas fa-globe"></i>
+
+            <div>
+                <h3 id="publishedAnnouncements">0</h3>
+                <span>Published</span>
+            </div>
+        </div>
+
+        <div class="stat-card draft">
+            <i class="fas fa-file-alt"></i>
+
+            <div>
+                <h3 id="draftAnnouncements">0</h3>
+                <span>Drafts</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="announcement-layout">
+
+
+        <div class="announcement-form">
+
+            <h3>Create Announcement</h3>
+
+            <div class="input-group">
+
+                <label>Title</label>
+
+                <input
+                    type="text"
+                    id="announcementTitle"
+                    placeholder="Enter announcement title"
+                >
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Message</label>
+
+                <textarea
+                    id="announcementMessage"
+                    rows="7"
+                    placeholder="Write your announcement..."
+                ></textarea>
+
+            </div>
+
+            <div class="input-group">
+
+                <label>Expiry Date (Optional)</label>
+
+                <input
+                    type="date"
+                    id="announcementExpiry"
+                >
+
+            </div>
+
+            <button id="createAnnouncementBtn">
+                Save as Draft
+            </button>
+
+        </div>
+
+        
+        <div class="announcement-feed">
+
+            <div class="feed-header">
+
+                <h3>Recent Announcements</h3>
+
+            </div>
+
+            <div id="announcementContainer">
+
+                <div class="announcement-empty">
+
+                    <i class="fas fa-bullhorn"></i>
+
+                    <h3>No announcements yet</h3>
+
+                    <p>
+                        Create your first announcement to notify users.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section id="contactMessagesSection" class="section">
+
+    <div class="section-header">
+
+        <h2>Contact Messages</h2>
+
+        <span id="messageCount">0 Messages</span>
+
+    </div>
+
+    <div class="contact-table-container">
+
+        <table id="contactTable">
+
+            <thead>
+
+                <tr>
+
+                    <th>Name</th>
+
+                    <th>Email</th>
+
+                    <th>Phone</th>
+
+                    <th>Status</th>
+
+                    <th>Date</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+<section id="settings" class="section">
+  <div class="settings-top">
+
+    <div>
+      <h2 class="page-title">Platform Settings</h2>
+      <p class="settings-subtitle">
+        Manage your crowdfunding platform configurations
+      </p>
+    </div>
+
+    <button class="save-settings-btn">
+      Save Changes
+    </button>
+
+  </div>
+
+  <!-- SETTINGS GRID -->
+  <div class="settings-grid">
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>General Settings</h3>
+        <i class="fa-solid fa-gear"></i>
+      </div>
+
+      <div class="field">
+        <label>Platform Name</label>
+        <input type="text" placeholder="CrowdFund" id="platformName">
+      </div>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Platform Fee (%)</label>
+          <input type="number" placeholder="5" id="platformFee">
+        </div>
+
+        <div class="field">
+          <label>Currency</label>
+          <select id="currency">
+            <option>USD</option>
+            <option>NGN</option>
+            <option>EUR</option>
+          </select>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>Campaign Limits</h3>
+        <i class="fa-solid fa-chart-column"></i>
+      </div>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Minimum Goal</label>
+          <input type="number" placeholder="100" id="minGoal">
+        </div>
+
+        <div class="field">
+          <label>Maximum Goal</label>
+          <input type="number" placeholder="100000" id="maxGoal">
+        </div>
+
+      </div>
+
+      <div class="field">
+        <label>Max Campaign Duration (days)</label>
+        <input type="number" placeholder="90" id="maxDuration">
+      </div>
+
+    </div>
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>Feature Controls</h3>
+        <i class="fa-solid fa-sliders"></i>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <h4>Auto Approve Campaigns</h4>
+          <p>Automatically approve submitted campaigns</p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" id="autoApprove">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <h4>Maintenance Mode</h4>
+          <p>Temporarily disable platform access</p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" id="maintenanceMode">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <h4>Guest Donations</h4>
+          <p>Allow donations without account registration</p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" checked id="guestDonations">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+
+    <div class="settings-card danger-zone">
+      <div class="card-header">
+        <h3>Platform Control</h3>
+        <i class="fa-solid fa-triangle-exclamation"></i>
+      </div>
+
+      <div class="danger-box">
+        <div class="danger-text">
+          <h4>Shutdown Platform</h4>
+
+          <p>
+            Temporarily disable access to the platform.
+            Users will see a maintenance page until the platform is restored.
+          </p>
+        </div>
+
+        <button id="shutdownPlatformBtn" class="danger-btn">
+          Take Platform Offline
+        </button>
+      </div>
+
+      <div class="danger-warning">
+        <i class="fa-solid fa-circle-info"></i>
+
+        <span>
+          Only admins can access the dashboard while maintenance is active.
+        </span>
+      </div>
+    </div>
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>Payment Settings</h3>
+        <i class="fa-solid fa-wallet"></i>
+      </div>
+
+      <div class="field">
+        <label>Minimum Withdrawal Amount</label>
+        <input type="number" placeholder="50" id="minWithdrawal">
+      </div>
+
+      <div class="row">
+
+        <div class="field">
+          <label>Withdrawal Fee (%)</label>
+          <input type="number" placeholder="2" id="withdrawalFee">
+        </div>
+
+        <div class="field">
+          <label>Payout Delay (days)</label>
+          <input type="number" placeholder="7" id="payoutDelay">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>Security Settings</h3>
+        <i class="fa-solid fa-shield-halved"></i>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <h4>Enable 2FA</h4>
+          <p>Require two-factor authentication for admins</p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" checked id="enable2FA">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div>
+          <h4>Email Verification</h4>
+          <p>Require email verification during signup</p>
+        </div>
+
+        <label class="switch">
+          <input type="checkbox" checked id="emailVerification">
+          <span class="slider"></span>
+        </label>
+      </div>
+
+    </div>
+
+    <div class="settings-card">
+
+      <div class="card-header">
+        <h3>Campaign Categories</h3>
+        <i class="fa-solid fa-layer-group"></i>
+      </div>
+
+      <div class="tags" id="categoriesContainer"></div>
+
+      <div class="category-input">
+
+        <input type="text" placeholder="Add new category" id="newCategory">
+
+        <button class="add-btn">
+          Add Category
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+  </main>
+</div>
+<div id="toastContainer"></div>
+<div class="confirm-modal" id="confirmModal">
+
+  <div class="confirm-box">
+
+    <div class="confirm-icon">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+
+    <h3 id="confirmTitle">
+      Confirm Action
+    </h3>
+
+    <p id="confirmMessage">
+      Are you sure you want to perform this action?
+    </p>
+
+    <div class="confirm-actions">
+
+      <button type="button" class="cancel-btn" id="confirmNo">
+        Cancel
+      </button>
+
+      <button type="button" class="confirm-btn" id="confirmYes">
+        Confirm
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="platformWithdrawModal">
+
+  <div class="platform-modal">
+
+    <div class="modal-header">
+      <h2>Withdraw Platform Funds</h2>
+
+      <button class="close-modal" id="closePlatformModal">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+
+    <div class="modal-body">
+
+      <div class="wallet-preview">
+        <p>Available Balance</p>
+        <h2 id="withdrawWalletBalance">₦0</h2>
+      </div>
+
+      <div class="input-group">
+        <label>Amount</label>
+        <input
+          type="number"
+          id="withdrawAmount"
+          placeholder="Enter amount"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>Bank Name</label>
+        <select id="withdrawBank">
+          <option value="">Select Bank</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Account Number</label>
+        <input
+          type="text"
+          maxlength="10"
+          id="accountNumberInput"
+          placeholder="0123456789"
+        >
+      </div>
+
+      <div class="input-group">
+        <label>Account Name</label>
+        <input
+          type="text"
+          id="accountName"
+          placeholder="John Doe"
+        >
+      </div>
+
+    </div>
+
+    <div class="modal-footer">
+
+      <button class="cancel-btn" id="cancelPlatformWithdraw">
+        Cancel
+      </button>
+
+      <button class="confirm-btn" id="submitPlatformWithdraw">
+        Withdraw funds
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div class="modal-overlay" id="contactModal">
+
+    <div class="contact-modal">
+
+        <div class="modal-header">
+
+            <h2>Contact Message</h2>
+
+            <button class="close-modal" id="closeContactModal">
+                <i class="fas fa-times"></i>
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="contact-info">
+
+                <div class="info-item">
+                    <label>Name</label>
+                    <p id="modalContactName"></p>
+                </div>
+
+                <div class="info-item">
+                    <label>Email</label>
+                    <p id="modalContactEmail"></p>
+                </div>
+
+                <div class="info-item">
+                    <label>Phone</label>
+                    <p id="modalContactPhone"></p>
+                </div>
+
+                <div class="info-item">
+                    <label>Date</label>
+                    <p id="modalContactDate"></p>
+                </div>
+
+            </div>
+
+            <div class="message-box">
+
+                <label>Message</label>
+
+                <div id="modalContactMessage"></div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="read-btn" id="markReadBtn">
+                Mark as Read
+            </button>
+
+            <button class="reply-btn" id="replyMessageBtn">
+              <i class="fas fa-reply"></i>
+              Reply
+            </button>
+
+            <button class="delete-btn" id="deleteMessageBtn">
+                Delete Message
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal-overlay" id="replyModal">
+
+    <div class="reply-modal">
+
+        <div class="modal-header">
+
+            <h2>
+                <i class="fas fa-paper-plane"></i>
+                Reply to Message
+            </h2>
+
+            <button class="close-modal" id="closeReplyModal">
+                <i class="fas fa-times"></i>
+            </button>
+
+        </div>
+
+        <div class="modal-body">
+
+            <div class="reply-user-info">
+
+                <div class="reply-info">
+                    <label>Name</label>
+                    <p id="replyUserName"></p>
+                </div>
+
+                <div class="reply-info">
+                    <label>Email</label>
+                    <p id="replyUserEmail"></p>
+                </div>
+
+            </div>
+
+            <div class="reply-field">
+
+                <label>Subject</label>
+
+                <input
+                    type="text"
+                    id="replySubject"
+                    placeholder="Subject"
+                    value="Reply from CrowdFund Support"
+                >
+
+            </div>
+
+            <div class="reply-field">
+
+                <label>Your Reply</label>
+
+                <textarea
+                    id="replyMessage"
+                    rows="8"
+                    placeholder="Type your response..."
+                ></textarea>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+
+            <button class="cancel-btn" id="cancelReplyBtn">
+                Cancel
+            </button>
+
+            <button class="confirm-btn" id="sendReplyBtn">
+                <i class="fas fa-paper-plane"></i>
+                Send Reply
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<div class="announcement-modal" id="announcementModal">
+
+    <div class="announcement-modal-box">
+
+        <div class="announcement-modal-header">
+
+            <div>
+                <span class="announcement-badge">📢 Announcement</span>
+                <h2 id="modalAnnouncementTitle"></h2>
+            </div>
+
+            <button id="closeAnnouncementModal">
+                <i class="fas fa-times"></i>
+            </button>
+
+        </div>
+
+        <div class="announcement-modal-body">
+
+            <p class="announcement-modal-date" id="modalAnnouncementDate"></p>
+
+            <div id="modalAnnouncementMessage"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.socket.io/4.8.3/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
+<script src="../javascript/config.js"></script>
+<script src="../javascript/admin.js"></script>
+<script src="../javascript/confirm.js"></script>
+</body>
+</html>
