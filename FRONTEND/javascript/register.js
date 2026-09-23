@@ -48,7 +48,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    window.location.href = "../pages/check-email.html";
+    window.location.href = "check-email.html";
 
   } catch (err) {
     console.error(err);

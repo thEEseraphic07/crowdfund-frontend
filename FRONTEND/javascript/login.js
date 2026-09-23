@@ -40,16 +40,16 @@ form.addEventListener("submit", async (e) => {
 
     if(data.twoFactorRequired){
       localStorage.setItem("tempEmail", data.email);
-      window.location.href = "../pages/verify-otp.html";
+      window.location.href = "verify-otp.html";
       return;
     }
 
     localStorage.setItem("token", data.token);
 
     if (data.user.isAdmin) {
-      window.location.href = "../pages/admin.html";
+      window.location.href = "admin.html";
     } else {
-      window.location.href = "../pages/dashboard.html";
+      window.location.href = "dashboard.html";
     }
 
     document.getElementById("email").value = localStorage.getItem("tempEmail");

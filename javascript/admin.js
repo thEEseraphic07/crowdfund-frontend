@@ -1,7 +1,7 @@
 const token = localStorage.getItem("token");
 
 if (!token) {
-  window.location.href = "../pages/login.html";
+  window.location.href = "login.html";
 }
 
 const socket = io(SOCKET_URL, {
@@ -1551,7 +1551,7 @@ async function logoutAdmin() {
   showToast("Logged out successfully", "success");
 
   setTimeout(() => {
-    window.location.href = "../pages/login.html";
+    window.location.href = "login.html";
   }, 1200);
 }
 
@@ -1658,7 +1658,7 @@ window.logoutAdmin = async function () {
   showToast("Logged out successfully", "success");
 
   setTimeout(() => {
-    window.location.href = "../pages/login.html";
+    window.location.href = "login.html";
   }, 1000);
 
 };

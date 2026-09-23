@@ -41,7 +41,7 @@ form.addEventListener("submit", async (e) => {
       msg.textContent = "Password reset successful! Redirecting...";
 
       setTimeout(() => {
-        window.location.href = "../pages/login.html";
+        window.location.href = "pages/login.html";
       }, 1500);
     } else {
       msg.textContent = data.message || "Reset failed";

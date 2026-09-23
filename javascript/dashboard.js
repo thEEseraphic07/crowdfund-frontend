@@ -1,7 +1,7 @@
 const token = localStorage.getItem("token");
 
 if (!token) {
-  window.location.href = "../pages/login.html";
+  window.location.href = "login.html";
 }
 
 const socket = io(SOCKET_URL, {
@@ -284,7 +284,7 @@ async function authFetch(endpoint, options = {}) {
     sessionStorage.getItem("token");
 
   if (!token) {
-    window.location.href = "../pages/login.html";
+    window.location.href = "login.html";
     return null;
   }
 
@@ -314,7 +314,7 @@ async function authFetch(endpoint, options = {}) {
       showToast("Session expired");
 
       setTimeout(() => {
-        window.location.href = "../pages/login.html";
+        window.location.href = "login.html";
       }, 1000);
 
       return null;
@@ -748,7 +748,7 @@ socket.on("accountStatusChanged", (data) => {
     alert("Your account has been suspended");
 
     localStorage.removeItem("token");
-    window.location.href = "../pages/login.html";
+    window.location.href = "login.html";
   }
 });
 
@@ -939,7 +939,7 @@ document.getElementById("logoutBtn").addEventListener("click", async () => {
   showToast("Logged out successfully", "success");
 
   setTimeout(() => {
-    window.location.href = "../pages/login.html";
+    window.location.href = "login.html";
   }, 1000);
 
 });
